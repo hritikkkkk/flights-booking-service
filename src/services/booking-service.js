@@ -108,7 +108,19 @@ const cancelBooking = async (bookingId) => {
   }
 };
 
+const cancelOldBookings = async () => {
+  try {
+    const time = new Date(Date.now() - 1000 * 30);
+    //5mins ago
+    const response = await bookingRepository.cancelOldBookings(time);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 module.exports = {
   createBooking,
   makePayment,
+  cancelOldBookings,
 };
